@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" />
+<script src="../../jquery.min.js"></script>
+<script src="jquery.confirm/jquery.confirm.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+function disp_pr()
+  {
+    $.confirm({
+                        'title'         : '是否存在',
+                        'message'       : 'You are about to delete this item. <br />It cannot be restored at a later time! Continue?',
+                        'buttons'       : {
+                                'Yes'   : {
+                                        'class' : 'blue',
+                                        'action': function(){
+                                        }
+                                },
+                                'No'    : {
+                                        'class' : 'gray',
+                                        'action': function(){}  // Nothing to do in this case. You can as well omit the action property.
+                                }
+                        }
+                });  
+}
+</script>
+<input type="button" onclick="disp_pr()" value="test啊" />
+
+</body>
+</html>

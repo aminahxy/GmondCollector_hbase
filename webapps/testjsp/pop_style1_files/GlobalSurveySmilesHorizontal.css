@@ -1,0 +1,292 @@
+﻿#surveySmilesContainer
+{
+	background: white;
+	border-left: 1px solid #E0E0E0;
+	border-top: 1px solid #E0E0E0;
+	bottom: 0;
+	-moz-box-shadow: -1px -1px 5px #CCC;
+	-webkit-box-shadow: -1px -1px 5px #CCC;
+	box-shadow: -1px -1px 5px #CCC;
+	padding: 5px 0 0 5px;
+	position: fixed;
+	right: 0;
+	z-index: 19999;
+	margin:0;
+	font-family: Verdana,Arial,sans-serif;
+	color: #505050;
+	display: block;
+	font-size: 11px;
+	line-height: 13px;
+}
+#surveySmilesContent
+{
+	background: white url(/Support/images/GlobalSurveySmiles/siteSurveyBg.png) repeat-x left bottom;
+	border-left: 4px solid #B7B7B7;
+	border-top: 4px solid #B7B7B7;
+	height: 90px;
+	padding: 10px;
+	width: 260px;
+}
+#surveySmilesContentCollapsed
+{
+    border: none;
+    height: 90px;
+    margin-bottom: 20px;
+    padding: 0;
+    width: 32px;
+}
+#surveySmilesExpanded
+{
+    right: 0px;
+    display: block;
+}
+#surveySmilesContentExpanded
+{
+    background: white url(/Support/images/GlobalSurveySmiles/surveySmilesGoodBackground.png) repeat-x left bottom;
+	border-left: 4px solid #B7B7B7;
+	border-top: 4px solid #B7B7B7;
+	height: 290px;
+	padding: 10px;
+	width: 360px;
+}
+#surveySmilesContentCollapsed .feedbackButton
+{
+    background: white url(/Support/images/GlobalSurveySmiles/feedbackButton.png) no-repeat;
+    cursor: pointer;
+    height: 103px;
+    width: 32px;
+    margin: 0;
+    padding: 0;
+}
+#surveySmilesContent h2
+{
+	color: #505050;
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 0px;
+	margin-bottom: 5px;
+	padding: 0;
+}
+.expandedHeader
+{
+    margin: 5px 5px 20px 0;
+    color: #505050;
+    font-size: 16px;
+    font-weight: bold;
+    float: left;
+}
+.greenHeader 
+{
+    margin: 5px 5px 20px 0;
+    color: #4E9E19;
+    font-size: 16px;
+	font-weight: bold;
+	float: left;
+}
+.redHeader
+{
+    margin: 5px 5px 20px 0;
+    color: #DC3C1E;
+    font-size: 16px;
+	font-weight: bold;
+	float: left;
+}
+#surveySmilesContent ul
+{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#surveySmilesContent ul li
+{
+	cursor: pointer;
+	float: left;
+	margin-left: 0;
+	margin-top: 15px;
+}
+.close
+{
+	background: #B7B7B7;
+	color: white;
+	cursor: pointer;
+	font-weight: bold;
+	padding: 2px 4px;
+	float: right;
+}
+.subtext
+{
+	color: #7C7C7C;
+	font-size: 12px;
+	margin: 0 0 10px;
+	padding-left: 1px
+}
+.happy 
+{
+	background-image:url('/Support/images/GlobalSurveySmiles/surveyfaces.png'); 
+	height: 31px; 
+	width: 33px;
+	margin: -7px 5px 0 0;
+	background-position:0px 0px;
+	float: left;
+}
+.sad 
+{
+	background-image:url('/Support/images/GlobalSurveySmiles/surveyfaces.png'); 
+	background-position:-33px 0px;
+	height: 31px; 
+	width: 33px;
+	margin: -7px 5px 0 0;
+	background-position:-33px 0px;
+	float: left;
+}
+.green
+{
+	font-weight: bold;
+	font-size: 12px;
+	float: left;
+	color: #4E9E19;
+	margin: 0 10px 10px 0px;
+	padding-left: 1px;
+}
+.red
+{
+	font-weight: bold;
+	float: left;
+	font-size: 12px;
+	color: #DC3C1E;
+	margin: 0 10px 10px 0px;
+	padding-left: 1px;
+}
+.breakline
+{
+	background: white;
+	border-left: 1px solid #CCC;
+	height: 25px;
+	margin: 0 10px;
+	width: 2px;
+	margin-top: 10px;
+}
+#surveySmilesCollapsed
+{
+    right: 0px;
+}
+.clear
+{
+    clear: both;
+}
+#surveySmilesContentExpanded label
+{
+    font-size: 12px;
+    margin: 10px 0 5px;
+    padding: 0;
+}
+#surveySmilesContentExpanded textarea
+{
+    border: 1px solid #505050;
+    height: 94px;
+    margin: 5px 0 10px;
+    width: 330px;
+    resize: none;
+}
+#surveySmilesContentExpanded input
+{
+    border: 1px solid #505050;
+    margin: 5px 0 10px;
+    width: 330px;
+}
+#siteSurveyPrivacyPolicy
+{
+    margin-bottom: 10px;
+}
+.submitFeedbackButton
+{
+    margin-right: 8px;
+    width: 162px;
+    background: #365EBF;
+    cursor: pointer;
+    box-sizing: border-box;
+    -webkit-box-align: center;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    color: white;
+    font-size: 16px;
+    font-weight: normal;
+    height: 30px;
+    padding: 0 5px;
+    text-align: center;
+    border: none;
+}
+.noComment
+{
+    background: #848484;
+    border: none;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    color: white;
+    font-size: 16px;
+    font-weight: normal;
+    height: 30px;
+    padding: 0 5px;
+    text-align: center;
+    width: 125px;
+    cursor: pointer;
+    margin: 0;
+}
+#surveySmilesThankYou
+{
+    right: 0px;
+}
+#surveySmilesThankYouContent
+{
+    background: white url(/Support/images/GlobalSurveySmiles/siteSurveyBg.png) repeat-x left bottom;
+    border-left: 4px solid #B7B7B7;
+    border-top: 4px solid #B7B7B7;
+    height: 80px;
+    padding: 10px;
+    width: 180px;
+    text-align: center;
+}
+#surveySmilesThankYouContent h2
+{
+    color: #505050;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+}
+#surveySmilesThankYouContent p
+{
+    margin: 10px 0;
+    color: #7C7C7C;
+    font-size: 12px;
+    padding-left: 1px;
+}
+.closeButton
+{
+    background: #365EBF;
+    border: none;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    color: white;
+    font-size: 16px;
+    font-weight: normal;
+    height: 30px;
+    padding: 0 5px;
+    text-align: center;
+    width: 125px;
+    cursor: pointer;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+.surveySmilesContent {
+}
+.error {
+    background-color: #ffd6d7 !important;
+    border: 1px solid #e80c4d !important;
+}

@@ -1,0 +1,37 @@
+<%@ page
+import="tentacles.util.*"
+import="tentacles.matrix_util.*"
+import="tentacles.http_tools.*"
+import="tentacles.matrix_util.*"
+import="java.util.HashMap"
+import="java.util.List"
+import="java.util.Map"
+
+%>
+<%
+        String op=request.getParameter("choose");
+        String clusterName=op.substring(0,op.length()-1);;
+        String arr[]= request.getParameterValues("phy");
+        get_single_phy single=new get_single_phy();
+        List testhui=single.get_phy_single(clusterName,arr);
+        GetMatrixNodeByClusterTag testhh=new GetMatrixNodeByClusterTag();
+        Map<String, Map<Object,Map<String,Map<String,Object>>>> resultmap=testhh.GetMatrixNode(testhui);
+
+        for (Map.Entry<String, Map<Object,Map<String,Map<String,Object>>>> entry : resultmap.entrySet() )
+        {
+        out.println(entry.getKey().toString().split(":")[entry.getKey().toString().split(":").length-1]);
+        out.println("<br>");
+        Map<Object,Map<String,Map<String,Object>> > metaInstance = entry.getValue();
+        for ( Map.Entry<Object,Map<String,Map<String,Object>>> entry1 : metaInstance.entrySet())
+        {
+         out.println("meta json is : ");
+                out.println("<br>");
+        out.println(entry1.getKey());
+                out.println("<br>");
+       // for ( Map.Entry<String,Map<String,Object>> entryChild : entry1.getValue().entrySet() ) {
+        //out.println(entryChild.getKey());
+        //}
+        }
+        }
+
+%>

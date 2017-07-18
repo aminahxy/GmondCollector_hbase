@@ -1,0 +1,16 @@
+<%@ page
+%>
+<%
+    Object out_obj=session.getAttribute("out_phy");
+    Object in_obj=session.getAttribute("input_phy");
+    Object cluster_obj=session.getAttribute("cluster");
+String host = request.getParameter("borrow");
+String out_phy=out_obj.toString();
+String input_phy=in_obj.toString();
+String cluster=cluster_obj.toString();
+out.println(host);
+out.println(out_phy);
+out.println(input_phy);
+out.println(cluster);
+
+%>

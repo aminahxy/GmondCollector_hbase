@@ -1,0 +1,427 @@
+﻿.rating
+{
+	display: block;
+	width: 101px;
+	height: 16px;
+	margin: 0 0 20px 0;
+	padding: 0;
+	list-style: none;
+	clear: both;
+	position: relative;
+	/*background: url(../images/kbsurvey/stars.jpg) no-repeat 0 0;*/
+	background: url(../images/KBsurveyRN/stars-transp.gif) no-repeat 0 0;
+}
+ul.rating li
+{
+	cursor: pointer; /*ie5 mac doesn't like it if the list is floated but ie6 does\*/
+	float: left; /* end hide*/
+	text-indent: -999em; /* hide text*/
+}
+ul.rating li a
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 20px;
+	height: 16px;
+	text-decoration: none;
+	z-index: 200;
+}
+ul.rating li.one a
+{
+	left: 0;
+}
+ul.rating li.two a
+{
+	left: 20px;
+}
+ul.rating li.three a
+{
+	left: 40px;
+}
+ul.rating li.four a
+{
+	left: 60px;
+}
+ul.rating li.five a
+{
+	left: 80px;
+}
+
+.nostar
+{
+	background-position: 0 -260px;
+}
+.halfstar
+{
+	background-position: 0 -234px;
+}
+.onestar
+{
+	background-position: 0 -208px;
+}
+.oneandhalfstar
+{
+	background-position: 0 -182px;
+}
+.twostar
+{
+	background-position: 0 -156px;
+}
+.twoandhalfstar
+{
+	background-position: 0 -130px;
+}
+.threestar
+{
+	background-position: 0 -104px;
+}
+.threeandhalfstar
+{
+	background-position: 0 -78px;
+}
+.fourstar
+{
+	background-position: 0 -52px;
+}
+.fourandhalfstar
+{
+	background-position: 0 -26px;
+}
+.fivestar
+{
+	background-position: 0 0px;
+}
+
+ul.rating li a:hover
+{
+	z-index: 2;
+	width: 101px;
+	height: 16px;
+	overflow: hidden;
+	left: 0;
+	/*background: url(../images/kbsurvey/stars.jpg) no-repeat 0 0;*/
+	background: url(../images/KBsurveyRN/stars-transp.gif) no-repeat 0 0;
+}
+ul.rating li.one a:hover
+{
+	background-position: 0 -208px;
+}
+ul.rating li.two a:hover
+{
+	background-position: 0 -156px;
+}
+ul.rating li.three a:hover
+{
+	background-position: 0 -104px;
+}
+ul.rating li.four a:hover
+{
+	background-position: 0 -52px;
+}
+ul.rating li.five a:hover
+{
+	background-position: 0 0px;
+}
+
+/*-------------------------------------------------------------------*/
+.srated
+{
+	width: 101px;
+	height: 16px;
+	margin: 0 0 0 0;
+	padding: 0;
+	list-style: none;
+	display: block;
+	/*background: url(../images/kbsurvey/stars.jpg) no-repeat 0 0;*/
+	background: url(../images/KBsurveyRN/stars-transp.gif) no-repeat 0 0;
+}
+ul.srated li
+{
+	cursor: pointer; /*ie5 mac doesn't like it if the list is floated but ie6 does\*/
+	float: right; /* end hide*/
+	text-indent: -999em; /* hide text*/
+}
+
+/*-------------------------------------------------------------------*/
+.rated
+{
+	display: block;
+	width: 101px;
+	height: 16px;
+	margin: 0 0 20px 0;
+	padding: 0;
+	list-style: none;
+	clear: both;
+	position: relative;
+	/*background: url(../images/kbsurvey/stars.jpg) no-repeat 0 0;*/
+	background: url(../images/KBsurveyRN/stars-transp.gif) no-repeat 0 0;
+}
+ul.rated li
+{
+	cursor: pointer; /*ie5 mac doesn't like it if the list is floated but ie6 does\*/
+	float: left; /* end hide*/
+	text-indent: -999em; /* hide text*/
+}
+
+.nostar
+{
+	background-position: 0 -260px;
+}
+.halfstar
+{
+	background-position: 0 -234px;
+}
+.onestar
+{
+	background-position: 0 -208px;
+}
+.oneandhalfstar
+{
+	background-position: 0 -182px;
+}
+.twostar
+{
+	background-position: 0 -156px;
+}
+.twoandhalfstar
+{
+	background-position: 0 -130px;
+}
+.threestar
+{
+	background-position: 0 -104px;
+}
+.threeandhalfstar
+{
+	background-position: 0 -78px;
+}
+.fourstar
+{
+	background-position: 0 -52px;
+}
+.fourandhalfstar
+{
+	background-position: 0 -26px;
+}
+.fivestar
+{
+	background-position: 0 0px;
+}
+/*-------------------------------------------------------------------*/
+.facerating
+{
+	width: 138px;
+	height: 19px;
+	margin: 0 0 20px 0;
+	padding: 0;
+	list-style: none;
+	clear: both;
+	position: relative;
+	background: url(../images/kbsurvey/smiles.jpg) no-repeat 0 0;
+}
+ul.facerating li
+{
+	cursor: pointer; /*ie5 mac doesn't like it if the list is floated but ie6 does\*/
+	float: left; /* end hide*/
+	text-indent: -999em; /* hide text*/
+}
+ul.facerating li a
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 28px;
+	height: 19px;
+	text-decoration: none;
+	z-index: 200;
+}
+ul.facerating li.stoked a
+{
+	left: 0;
+}
+ul.facerating li.happy a
+{
+	left: 28px;
+}
+ul.facerating li.neutral a
+{
+	left: 55px;
+}
+ul.facerating li.sad a
+{
+	left: 83px;
+}
+ul.facerating li.furious a
+{
+	left: 112px;
+}
+
+.allfaces
+{
+	background-position: 0 -147px;
+}
+.stokedface
+{
+	background-position: 0 -116px;
+}
+.happyface
+{
+	background-position: 0 -87px;
+}
+.neutralface
+{
+	background-position: 0 -58px;
+}
+.sadface
+{
+	background-position: 0 -29px;
+}
+.furiousface
+{
+	background-position: 0 0px;
+}
+
+ul.facerating li a:hover
+{
+	z-index: 2;
+	width: 140px;
+	height: 19px;
+	overflow: hidden;
+	left: 0;
+	background: url(../images/kbsurvey/smiles.jpg) no-repeat 0 0;
+}
+ul.facerating li.stoked a:hover
+{
+	background-position: 0 -116px;
+}
+ul.facerating li.happy a:hover
+{
+	background-position: 0 -87px;
+}
+ul.facerating li.neutral a:hover
+{
+	background-position: 0 -58px;
+}
+ul.facerating li.sad a:hover
+{
+	background-position: 0 -29px;
+}
+ul.facerating li.furious a:hover
+{
+	background-position: 0 0px;
+}
+/*------------------------------------------------------------*/
+
+.facerated
+{
+	width: 138px;
+	height: 19px;
+	margin: 0 0 20px 0;
+	padding: 0;
+	list-style: none;
+	clear: both;
+	position: relative;
+	background: url(../images/kbsurvey/smiles.jpg) no-repeat 0 0;
+}
+ul.facerated li
+{
+	cursor: pointer; /*ie5 mac doesn't like it if the list is floated but ie6 does\*/
+	float: left; /* end hide*/
+	text-indent: -999em; /* hide text*/
+}
+.allfaces
+{
+	background-position: 0 -147px;
+}
+.stokedface
+{
+	background-position: 0 -116px;
+}
+.happyface
+{
+	background-position: 0 -87px;
+}
+.neutralface
+{
+	background-position: 0 -58px;
+}
+.sadface
+{
+	background-position: 0 -29px;
+}
+.furiousface
+{
+	background-position: 0 0px;
+}
+
+.kbsurveyTopFrame
+{
+	height: 6px;
+	width: 745px;
+	background: url(../images/kbsurvey/new/KBsurvey_top.jpg) no-repeat;
+}
+.kbsurveyMidFrame
+{
+	background: url(../images/kbsurvey/new/KBsurvey_sides.jpg);
+}
+.kbsurveyBottomFrame
+{
+	background: url(../images/kbsurvey/new/KBsurvey_bottom.jpg);
+	height: 6px;
+}
+.kbsurveyBoxContainer
+{
+	background: url(../images/kbsurvey/new/KBsurvey_commentBox.gif) no-repeat;
+	width: 430px;
+	height: 44px;
+	display: block;
+	margin-bottom: 5px;
+}
+.kbsurveybox
+{
+	border: none;
+	background: none;
+	padding: 3px 3px 7px 3px;
+	color: #B1B1B1;
+	width: 419px;
+	height: 30px;
+	overflow: auto;
+	line-height: 12px;
+}
+.kbsurveyTitleContainer
+{
+	font-weight: bold;
+	font-size: 14px;
+	width: 705px;
+	margin: 10px 20px 20px 20px;
+}
+.kbstaticStarsContainer
+{
+	width: 705px;
+	margin: 10px 20px 20px 20px;
+}
+.kbstarSurveyExpContainer
+{
+	width: 705px;
+	margin: 10px 20px 20px 20px;
+	display: none;
+}
+.kbsurverHolder
+{
+	width: 745px;
+	overflow: hidden;
+}
+.kbstarHolder
+{
+	height: 15px;
+	width: 85px;
+}
+.kbssubmitbuttonholder
+{
+	overflow: hidden; 
+	width: 97px; 
+	height: 28px; 
+	margin: 0; 
+	padding: 0;	
+}

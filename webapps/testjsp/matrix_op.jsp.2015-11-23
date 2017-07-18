@@ -1,0 +1,110 @@
+<%@ page
+import ="java.io.BufferedReader"
+import ="java.io.FileReader"
+import ="java.io.UnsupportedEncodingException"
+import="java.nio.Buffer"
+import="java.text.DecimalFormat"
+import="tentacles.util.EasyWebGet"
+import="tentacles.util.host_ip"
+import="tentacles.util.get_host"
+import="tentacles.util.*"
+import="tentacles.util.matrix_clientop"
+import="java.io.IOException"
+import="java.util.HashMap"
+import="java.util.Map"
+import="java.util.logging.FileHandler"
+import="java.util.regex.*"
+import="com.google.gson.Gson"
+import="com.baidu.inf.matrix.master.rpc.masterclientproto.ThriftInstanceMeta"
+import="java.io.PrintWriter"
+import="java.io.StringWriter"
+import="org.apache.thrift.transport.TTransportException"
+import="org.apache.thrift.TException"
+%>
+<html ><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div id="matrix_op">
+<%  
+Object num=session.getAttribute("hahaha");
+Object obj_op=session.getAttribute("op");
+//   Object obj_listnode=session.getAttribute("listnode");
+int num1 = Integer.parseInt(num.toString());
+//        out.println(obj_op.toString());
+String op=obj_op.toString();
+String[] host=new String[num1+1];
+String[] metajson=new String[num1+1];
+String[] listnode=new String[num1];
+for (int j=1;j<num1+1;j++)
+{
+	Object obj_host=session.getAttribute("host"+j);
+	Object obj_metajson=session.getAttribute("metajson"+j);
+	Object obj_listnode=session.getAttribute("listnode"+j);
+	host[j]=obj_host.toString();
+	metajson[j]=obj_metajson.toString();
+	listnode[j-1]=obj_listnode.toString();
+	String[]matrixNodeInfo=listnode[j-1].split(":");
+	String matrix_service=matrixNodeInfo[0];
+	String user=matrixNodeInfo[2];
+	String token=matrixNodeInfo[3];
+	String serviceName=matrixNodeInfo[4];
+	Gson testgson=new Gson();
+	get_host get_host=new get_host();
+	matrix_clientop clientop=new matrix_clientop();
+ 
+	try{
+		clientop.matrix_client_open(matrix_service);
+	}
+	catch(TTransportException e)
+	{
+		StringWriter sw=new StringWriter();
+		PrintWriter pw=new PrintWriter(sw);
+		e.printStackTrace(pw);
+		out.println(sw.toString());
+	}
+
+	ThriftInstanceMeta metatest=testgson.fromJson(metajson[j],ThriftInstanceMeta.class);
+
+	String [] hosts_array = get_host.get_host_ip(host[j]).toString().split(" ");
+	int hosts_num = hosts_array.length;
+	for(int i=0;i<hosts_num;i++)
+	{
+		//out.flush(); 
+		//out.println(i + ":" + hosts_array[i].replace(".",""));
+		int offset=Integer.valueOf(hosts_array[i].replace(".","")).intValue();
+		out.println("ip:" + hosts_array[i] + " operation:" + op + " offset: " + offset );
+                out.println("<br>");
+		try{
+			if(op.equals("add"))
+			{
+	             	   clientop.matrix_add(user,token,serviceName,offset,hosts_array[i],metatest);
+			}
+			else if(op.equals("delete"))
+			{
+				clientop.matrix_delete(user,token,serviceName,offset);
+			}
+			else if(op.equals("update"))
+			{
+				clientop.matrix_update(user,token,serviceName,offset,metatest);
+			}
+			else
+			{
+				clientop.matrix_reset(user,token,serviceName,offset,hosts_array[i],metatest);
+			}
+			out.println(op + " " + offset + " finished");
+                        out.println("<br>");
+			out.flush();
+		}catch(TException e){
+			StringWriter sw=new StringWriter();
+			PrintWriter pw=new PrintWriter(sw);
+			e.printStackTrace(pw);
+			out.println(sw.toString());
+                        out.println("<br>");
+                        
+		}
+	}
+}
+%>
+<script language="javascript">var inProduct = 'False'; var userSku = 'pro';if(window.doStartup){doStartup()}</script>
+
+</body></html>

@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+</style>
+<script type="text/javascript" src="../jquery.min.js"></script>
+<script type="text/javascript" src="jquery.form.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var options = { 
+       // target:        '#output',   // target element(s) to be updated with server response 
+        beforeSubmit:  showRequest,  // pre-submit callback 
+        success:       showResponse,  // post-submit callback
+		resetForm: true, 
+		dataType:  'json' 
+ 
+        // other available options: 
+        //url:       url         // override for form's 'action' attribute 
+        //type:      type        // 'get' or 'post', override for form's 'method' attribute 
+        //dataType:  null        // 'xml', 'script', or 'json' (expected server response type) 
+        //clearForm: true        // clear all form fields after successful submit 
+        //resetForm: true        // reset the form after successful submit 
+ 
+        // $.ajax options can be used here too, for example: 
+        //timeout:   3000 
+    }; 
+ 
+    // bind to the form's submit event 
+    $('#my_form').submit(function() { 
+        // inside event callbacks 'this' is the DOM element so we first 
+        // wrap it in a jQuery object and then invoke ajaxSubmit 
+        $(this).ajaxSubmit(options); 
+ 
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation 
+        return false; 
+    }); 
+});
+// pre-submit callback 
+function showRequest(formData, jqForm, options) { 
+	
+	$("#msg").html("正在提交...");
+    
+    return true; 
+} 
+    
+ 
+// post-submit callback 
+function showResponse(responseText, statusText)  { 
+	$("#msg").html('提交成功');
+      document.getElementById("test").disabled=false;
+    // for normal html responses, the first argument to the success callback 
+    // is the XMLHttpRequest object's responseText property 
+ 
+    // if the ajaxSubmit method was passed an Options Object with the dataType 
+    // property set to 'xml' then the first argument to the success callback 
+    // is the XMLHttpRequest object's responseXML property 
+ 
+    // if the ajaxSubmit method was passed an Options Object with the dataType 
+    // property set to 'json' then the first argument to the success callback 
+    // is the json data object returned by the server 
+ 
+    //alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + 
+    //    '\n\nThe output div should have already been updated with the responseText.'); 
+} 
+</script>
+</head>
+<body>
+   <div class="demo">
+   		<form id="my_form" action="aa.jsp" method="post"> 
+            <p style="margin-left:30px"><input type="submit" class="btn" value="提交"><span id="msg"></span></p>
+		</form>
+                <p><button type="button" id="test" disabled="true"  class="btn btn-default btn-lg" width=100px >保存</button></a></p>
+		<div id="output"></div>
+   </div>
+   
+
+</body>
+</html>

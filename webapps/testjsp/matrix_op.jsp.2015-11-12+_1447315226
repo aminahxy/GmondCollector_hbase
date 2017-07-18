@@ -1,0 +1,140 @@
+<%@ page
+import ="java.io.BufferedReader"
+import ="java.io.FileReader"
+import ="java.io.UnsupportedEncodingException"
+import="java.nio.Buffer"
+import="java.text.DecimalFormat"
+import="tentacles.util.EasyWebGet"
+import="tentacles.util.host_ip"
+import="tentacles.util.get_host"
+import="tentacles.util.*"
+import="tentacles.util.matrix_clientop"
+import="java.io.IOException"
+import="java.util.HashMap"
+import="java.util.Map"
+import="java.util.logging.FileHandler"
+import="java.util.regex.*"
+import="com.google.gson.Gson"
+import="com.baidu.inf.matrix.master.rpc.masterclientproto.ThriftInstanceMeta"
+import="java.io.PrintWriter"
+import="java.io.StringWriter"
+import="org.apache.thrift.transport.TTransportException"
+import="org.apache.thrift.TException"
+%>
+<html ><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div id="matrix_op">
+<%
+   String host = request.getParameter("host");
+           String file = request.getParameter("metajson");
+           String matrix_service = request.getParameter("matrix_service");
+           String user = request.getParameter("user");
+           String token = request.getParameter("token");
+           String serviceName = request.getParameter("serviceName");
+           String op=request.getParameter("op");
+           Gson testgson=new Gson();
+           StringBuffer sb = new StringBuffer();
+           get_host get_host=new get_host();
+           matrix_clientop clientop=new matrix_clientop();
+           int[] offset=new int[get_host.get_host_ip(host).toString().split(" ").length];
+          
+          //out.println(file);
+   //        ThriftInstanceMeta metatest=testgson.fromJson(metajson, ThriftInstanceMeta.class)
+           try{
+           FileUtils.readToBuffer(sb,file);}
+           catch (IOException e)
+           {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            out.println(sw.toString()); 
+           }
+           try {
+           clientop.matrix_client_open(matrix_service);
+            }
+           catch ( TTransportException e)
+           {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            out.println(sw.toString()); 
+            }
+             
+           //out.println(sb);
+           ThriftInstanceMeta metatest=testgson.fromJson(sb.toString(),ThriftInstanceMeta.class);
+          //out.println(metatest);
+
+           if (op.equals("add"))
+           {
+           for (int i=0;i<get_host.get_host_ip(host).toString().split(" ").length;i++)
+           {
+           offset[i]=Integer.valueOf(get_host.get_host_ip(host).toString().replace(".", "").split(" ")[i]).intValue();
+           //clientop.matrix_add("normandy-mix","normandy-mix","pegasus-fcr-normandy-agent.NJ01-PEGASUS.hz01",offset1,metatest);
+           try{
+            clientop.matrix_add(user,token,serviceName,offset[i],metatest);
+           out.println("add"+offset[i]+"success");
+          } catch (TException e){
+             
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+           out.println(sw.toString());
+             }
+
+              }
+
+            }
+           else if (op.equals("delete"))
+           {
+           for (int i=0;i<get_host.get_host_ip(host).toString().split(" ").length;i++)
+           {
+           offset[i]=Integer.valueOf(get_host.get_host_ip(host).toString().replace(".", "").split(" ")[i]).intValue();
+         try{  
+         clientop.matrix_delete(user,token,serviceName,offset[i]);
+           out.println("delete"+offset[i]+"success");
+           }catch (TException e){
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+           out.println(sw.toString());
+           }
+           }
+
+           }
+           else if (op.equals("update"))
+           {
+           for (int i=0;i<get_host.get_host_ip(host).toString().split(" ").length;i++)
+           {
+           offset[i]=Integer.valueOf(get_host.get_host_ip(host).toString().replace(".", "").split(" ")[i]).intValue();
+         try{ 
+          clientop.matrix_update(user,token,serviceName,offset[i],metatest);
+           out.println("update"+offset[i]+"success");
+           }catch (TException e){
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+           out.println(sw.toString());
+            }
+           }
+           }
+           else
+           {
+           for (int i=0;i<get_host.get_host_ip(host).toString().split(" ").length;i++)
+           {
+           offset[i]=Integer.valueOf(get_host.get_host_ip(host).toString().replace(".", "").split(" ")[i]).intValue();
+          try{
+          clientop.matrix_reset(user,token,serviceName,offset[i],metatest);
+           out.println("reset"+offset[i]+"success");
+           }catch (TException e){
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+           out.println(sw.toString());
+           }
+           }
+           }
+      %>
+        <script language="javascript">var inProduct = 'False'; var userSku = 'pro';if(window.doStartup){doStartup()}</script>
+
+        </body></html>

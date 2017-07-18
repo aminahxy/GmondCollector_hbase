@@ -1,0 +1,17 @@
+<%@ page
+import="tentacles.util.*"
+%>
+<%
+String op=request.getParameter("choose");
+//String clusterName=request.getParameter("cluster");
+String clusterName=op.substring(0,op.length()-1);;
+String arr[]= request.getParameterValues("phy");
+get_single_phy single=new get_single_phy();
+out.println(single.get_phy_single(clusterName,arr));
+
+
+//for(int i=0;i<arr.length;i++){
+//out.println(single.get_phy_single("nj01-jiuying",arr[i]));
+//out.println(single.get_phy_single(clusterName,arr[i]));
+//}
+%>

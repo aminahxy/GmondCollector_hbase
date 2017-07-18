@@ -1,0 +1,109 @@
+<%@ page
+import ="java.io.BufferedReader"
+import ="java.io.FileReader"
+import ="java.io.UnsupportedEncodingException"
+import="java.nio.Buffer"
+import="java.text.DecimalFormat"
+import="tentacles.util.EasyWebGet"
+import="java.io.IOException"
+import="java.util.HashMap"
+import="java.util.Map"
+import="java.util.logging.FileHandler"
+import="java.util.regex.*"
+import="org.json.JSONArray"
+import="org.json.JSONObject"
+import="org.apache.http.HttpEntity"
+import="org.apache.http.HttpResponse"
+import="org.apache.http.client.HttpClient"
+import="org.apache.http.client.methods.HttpGet"
+import="org.apache.http.impl.client.DefaultHttpClient"
+import="org.apache.http.util.EntityUtils"
+import="org.apache.http.client.ClientProtocolException"
+%>
+<html ><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div id="conf_get">
+
+<%
+
+        String clusterName = request.getParameter("cluster");
+        HttpClient httpclient = new DefaultHttpClient();
+        String history_url = null;
+        String scheduler_url = null;
+        Map<String, String> conf_res =new HashMap<String, String>();
+        JSONArray testjson=new JSONArray();
+           HttpGet history = new HttpGet("http://" + clusterName + "-normandy.dmop.baidu.com:8033/filetree?action=cat&path=/normandy_scheduler.conf");
+         try {
+                        HttpResponse response_history =httpclient.execute(history);
+                        HttpEntity rspEntity_history = response_history.getEntity();
+
+                        if (rspEntity_history != null) {
+                            history_url = EntityUtils.toString(rspEntity_history);
+                        }
+
+            //history_url = tentacles.util.EasyWebGet.get("http://"+clusterName+"-normandy.dmop.baidu.com:8033/filetree?action=cat&path=/normandy_scheduler.conf");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String regex = "schedule.*.";
+        String input =history_url;
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(input);
+        StringBuffer scheduler=new StringBuffer();
+
+        while(m.find()) {
+
+            scheduler.append(history_url.substring(m.start(),m.end())+"\n");
+        }
+        String[] a=scheduler.toString().split("\n");
+        String[] phy=new String[a.length];
+        for(int k=0;k<a.length;k++) {
+
+            phy[k]=a[k].split(".conf")[0].split("scheduler_")[1];
+        }
+
+        for (int j = 0; j<a.length;j++) {
+                    HttpGet httpget = new HttpGet("http://" + clusterName + "-normandy.dmop.baidu.com:8033/filetree?action=cat&path=/" + a[j]);
+                    try {
+                        HttpResponse response_schedu =httpclient.execute(httpget);
+                        HttpEntity rspEntity_schedu = response_schedu.getEntity();
+                      //  BufferedReader br = new BufferedReader(
+                       // new InputStreamReader(response_schedu.getEntity().getContent()));   
+                     if (rspEntity_schedu != null) {
+                            scheduler_url = EntityUtils.toString(rspEntity_schedu);
+                        }
+                    //br.close();
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
+           //br.close(); 
+            StringBuffer scheduler_value=new StringBuffer();
+
+            String[] regex_value = {"ScheTag.*", "MatrixRpcServer:.*", "DependServerName:.*", "DependServerUser:.*", "DependServerToken:.*"};
+            String input_schedule = scheduler_url;
+            Pattern[] p_value = {Pattern.compile(regex_value[0]), Pattern.compile(regex_value[1]), Pattern.compile(regex_value[2]), Pattern.compile(regex_value[3]), Pattern.compile(regex_value[4])};
+            Matcher[] m_value = {p_value[0].matcher(input_schedule), p_value[1].matcher(input_schedule), p_value[2].matcher(input_schedule), p_value[3].matcher(input_schedule), p_value[4].matcher(input_schedule)};
+            for (int i = 0; i < regex_value.length; i++) {
+                while (m_value[i].find()) {
+                    scheduler_value.append(scheduler_url.substring(m_value[i].start(), m_value[i].end()) + " ");
+
+                }
+            }
+            String[] conf_value=new String[a.length];
+            conf_value[j]=scheduler_value.toString();
+            conf_res.put(phy[j],conf_value[j]);
+        }
+      //  System.out.println(conf_res);
+        testjson.put(conf_res);
+        //out.println(conf_res);
+         out.println(testjson);
+
+                %>
+        <script language="javascript">var inProduct = 'False'; var userSku = 'pro';if(window.doStartup){doStartup()}</script>
+
+        </body></html>
+

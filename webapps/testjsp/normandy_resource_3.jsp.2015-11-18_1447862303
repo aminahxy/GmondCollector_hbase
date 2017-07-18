@@ -1,0 +1,92 @@
+<%@ page
+import="com.google.gson.Gson"
+import="tentacles.matrix_util.GetInstanceMetaInService"
+import="tentacles.matrix_util.GetMultiMetaInstance"
+import="tentacles.util.Get_Conf_Concurrent"
+import="tentacles.util.*"
+import="java.util.HashMap"
+import="java.util.List"
+import="java.util.Map"
+        import ="java.io.BufferedReader"
+        import ="java.io.FileReader"
+        import ="java.io.UnsupportedEncodingException"
+        import="java.nio.Buffer"
+        import="java.text.DecimalFormat"
+        import="tentacles.util.EasyWebGet"
+        import="tentacles.util.host_ip"
+        import="tentacles.util.get_host"
+        import="tentacles.util.*"
+        import="tentacles.util.matrix_clientop"
+        import="java.io.IOException"
+        import="java.util.HashMap"
+        import="java.util.Map"
+        import="java.util.logging.FileHandler"
+        import="java.util.regex.*"
+        import="com.baidu.inf.matrix.master.rpc.masterclientproto.ThriftInstanceMeta"
+        import="java.io.PrintWriter"
+        import="java.io.StringWriter"
+        import="org.apache.thrift.transport.TTransportException"
+        import="org.apache.thrift.TException"
+%>
+<%
+        Object cluster_obj=session.getAttribute("cluster");
+        Object out_obj=session.getAttribute("out_phy");
+        Object in_obj=session.getAttribute("input_phy");
+        String cluster=cluster_obj.toString();
+        String host = request.getParameter("borrow");
+        String out_phy=out_obj.toString();
+        String input_phy=in_obj.toString();
+        matrix_clientop clientop=new matrix_clientop();
+        get_single_phy testnode=new get_single_phy();
+        String []phy_out=new String[1];
+        phy_out[0]=out_phy;
+        String []phy_in=new String[1];
+        phy_in[0]=input_phy;
+        List testhui= testnode.get_phy_single(cluster, phy_out);
+        List testhui_add= testnode.get_phy_single(cluster, phy_in);
+        String matrix_service=testhui.toString().split(":")[0].substring(1, testhui.toString().split(":")[0].length());
+        String user=testhui.toString().split(":")[2];
+        String token=testhui.toString().split(":")[3];
+        String serviceName=testhui.toString().split(":")[4];
+        String matrix_service_add=testhui_add.toString().split(":")[0].substring(1, testhui.toString().split(":")[0].length());
+        String user_add=testhui_add.toString().split(":")[2];
+        String token_add=testhui_add.toString().split(":")[3];
+        String serviceName_add=testhui_add.toString().split(":")[4];
+        try{
+        clientop.matrix_client_open(matrix_service);
+        }
+        catch(TTransportException e)
+        {
+        StringWriter sw=new StringWriter();
+        PrintWriter pw=new PrintWriter(sw);
+        e.printStackTrace(pw);
+        out.println(sw.toString());
+        }
+        
+        int hosts_num =host.split(" ").length;
+        for(int i=0;i<hosts_num;i++)
+        {
+
+        int offset=Integer.valueOf(host.split(" ")[i].replace(".","")).intValue();
+        try{
+        clientop.matrix_delete(user,token,serviceName,offset);
+        out.println("delete"+host.split(" ")[i]+"success");
+        }
+        catch(TException e){
+        StringWriter sw=new StringWriter();
+        PrintWriter pw=new PrintWriter(sw);
+        e.printStackTrace(pw);
+        out.println(sw.toString());
+        out.println("<br>");
+        }
+        }
+
+        //打tag
+        //
+        //
+        启动机器
+        //
+
+
+%>
+

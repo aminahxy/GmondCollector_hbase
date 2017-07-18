@@ -1,0 +1,46 @@
+<%@ page
+%>
+<html ><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div id="matrix_op">
+<% 
+  Object num=session.getAttribute("hahaha");
+  Object listnode_obj=session.getAttribute("listnode");
+    //String num1=num.toString();
+    int num1 = Integer.parseInt(num.toString());
+   
+    String[] host=new String[num1+1];
+   String[] metajson=new String[num1+1];
+   String listnode=listnode_obj.toString();
+   String listnode_tmp=listnode.substring(1,listnode.length()-1);
+   String[] listnode_display=new String[num1+1];
+   for(int i=1;i<=num1;i++)
+   {
+      int j=100+i;
+      String host_str=""+j;
+      String metajson_str=""+i;
+      host[i]=request.getParameter(host_str);
+      metajson[i]=request.getParameter(metajson_str);
+      listnode_display[i-1]=listnode_tmp.split(",")[i-1].trim();
+       String[] matrixNodeInfo=listnode_display[i-1].split(":");
+          String  ms = matrixNodeInfo[0];
+         String service = matrixNodeInfo[4];
+        //out.println(ms);
+       out.println("<a href=http://" + ms + ":8529/servicedetail.jsp?serviceName=" + service + ">"+listnode_display[i-1]+"</a>");
+           out.println("<br>");
+            out.println("<br>");
+            out.println("<br>");
+            out.println("<br>");
+     //out.println(listnode_display[i]);
+    //out.println(metajson[i]);
+     
+}
+   session.setAttribute("host",host);
+   session.setAttribute("metajson",metajson);
+   session.setAttribute("listnode",listnode);
+   //out.println(listnode);
+   
+   %>
+   
+        </body></html>

@@ -1,0 +1,84 @@
+﻿#ClosedLoopFeedbackContent
+{
+    width: 565px;
+    overflow: hidden;
+}
+#ClosedLoopFeedbackContent .CLFTopContainer, #ClosedLoopFeedbackContent .CLFBottomContainer
+{
+    width: 565px;
+    height: 8px;
+    overflow: hidden;
+}
+#ClosedLoopFeedbackContent .CLFTopLeft
+{
+    float: left;
+    width: 8px;
+    height: 8px;
+    background: url(/Support/images/ClosedLoopFeedback/subscribe_corner_topleft.jpg);
+    overflow: hidden;
+}
+#ClosedLoopFeedbackContent .CLFTopLine
+{
+    float: left;
+    width: 549px;
+    height: 7px;
+    border-top: solid 1px #d7d9e5;
+    background-color: #e9f0f8;
+}
+#ClosedLoopFeedbackContent .CLFTopRight
+{
+    float: left;
+    width: 8px;
+    height: 8px;
+    background: url(/Support/images/ClosedLoopFeedback/subscribe_corner_topright.jpg);
+    overflow: hidden;
+}
+#ClosedLoopFeedbackContent .CLFMidContainer
+{
+    width: 563px;
+    overflow: hidden;
+    border-left: solid 1px #d7d9e5;
+    border-right: solid 1px #d7d9e5;
+    background: url(/Support/images/ClosedLoopFeedback/subscribe_bg_gradient.jpg);
+    background-repeat: repeat-x;
+}
+#ClosedLoopFeedbackContent .CLFContent
+{
+    padding: 10px;
+}
+#ClosedLoopFeedbackContent .CLFBottomLeft
+{
+    float: left;
+    width: 8px;
+    height: 8px;
+    background: url(/Support/images/ClosedLoopFeedback/subscribe_corner_bottleft.jpg);
+    overflow: hidden;
+}
+#ClosedLoopFeedbackContent .CLFBottomLine
+{
+    float: left;
+    width: 549px;
+    height: 7px;
+    border-bottom: solid 1px #d7d9e5;
+}
+#ClosedLoopFeedbackContent .CLFBottomRight
+{
+    float: left;
+    width: 8px;
+    height: 8px;
+    background: url(/Support/images/ClosedLoopFeedback/subscribe_corner_bottright.jpg);
+    overflow: hidden;
+}
+#ClosedLoopFeedbackContent .CLFHeader
+{
+    float: left;
+    width: 420px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #505050;
+}
+#ClosedLoopFeedbackContent .CLFButton
+{
+    float: left;
+    width: 116px;
+}

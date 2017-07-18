@@ -1,0 +1,74 @@
+﻿#Footer2010Wrapper
+    {
+        padding-top: 20px;
+        width: 950px;
+        overflow: hidden;
+    }
+    #Footer2010Wrapper .TopContainer, #Footer2010Wrapper .BottomContainer
+    {
+        height: 7px;
+        overflow: hidden;
+    }
+    #Footer2010Wrapper .TopLeft
+    {
+        width: 7px;
+        height: 7px;
+        overflow: hidden;
+        background-image: url(/Support/images/Corners/TopLeftGreenCorner.gif);
+        float: left;
+    }
+    #Footer2010Wrapper .TopLine, #Footer2010Wrapper .BottomLine
+    {
+        width: 936px;
+        height: 7px;
+        overflow: hidden;
+        float: left;
+        background-color: #f4f8ff;
+    }
+    #Footer2010Wrapper .TopRight
+    {
+        width: 7px;
+        height: 7px;
+        overflow: hidden;
+        background-image: url(/Support/images/Corners/TopRightGreenCorner.gif);
+        float: left;
+    }
+    #Footer2010Wrapper .MidContainer
+    {
+        width: 950px;
+        background-color: #f4f8ff;
+    }
+    #Footer2010Wrapper .Content
+    {
+        padding: 13px 30px 13px 30px;
+    }
+    #Footer2010Wrapper .BottomLeft
+    {
+        width: 7px;
+        height: 7px;
+        overflow: hidden;
+        background-image: url(/Support/images/Corners/BottomLeftGreenCorner.gif);
+        float: left;
+    }
+    #Footer2010Wrapper .BottomRight
+    {
+        width: 7px;
+        height: 7px;
+        overflow: hidden;
+        background-image: url(/Support/images/Corners/BottomRightGreenCorner.gif);
+        float: left;
+    }
+    #Footer2010Wrapper a
+    {
+        color:#999999;	
+        text-decoration: none;
+    }
+    #Footer2010Wrapper a:hover
+    {
+        color:#999999;	
+        text-decoration: underline;
+    }
+    #Footer2010Wrapper a:visited
+    {
+    	
+    }

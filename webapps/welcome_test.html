@@ -1,0 +1,53 @@
+<html lang="en" class=" js no-touch"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <!-- Force IE9 to render in normal mode -->
+        <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+
+        <link href="bootstrap/css/icons.css" rel="stylesheet">
+
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+ 
+        <link href="download/appstart/assets/css/main.css" rel="stylesheet">
+
+
+</head>
+<style type="text/css">
+#bgimg{
+x-index:0,
+}
+#text{
+x-index:1
+}
+.btn {width:200; color:green}
+</style>
+
+<body  bgcolor="#FFFFFF" width=100% height=10 >
+     <div class="func" id=text>
+    <div style="position:absolute;width:200px;margin:200px;left:250 ;" class="background", id=bgimg>
+     <img src="resources/blue_octopus2.png"  align="center"/>
+    </div>
+            <div class="btn btn group btn-group-vertical" >
+              <br>
+              <br>
+              <br>
+              <p><a href="./XXX.jsp" target="_top"><button type="button" class="btn btn-default btn-lg" width=100px >add other</button></a></p>
+              <!--p><a href="http://szwg-hadoop-nb00.szwg01.baidu.com:8080/dns_handler/index/" target="_top"><button width=100px type="button" class="btn btn-default btn-lg" >dns</button></a></p-->
+              <!--p><a href="./seekblock.jsp" target="_top"><button type="button" class="btn btn-default btn-lg" width=100px >seek block</button></a></p-->
+              <!--p><a href="./normandy_display.jsp" target="_top"><button type="button" class="btn btn-default btn-lg" width=100px >normandy queue info</button></a></p-->
+            </div>
+         <label class="checkbox-inline">
+             <input type="radio" name="choose" id="large"
+                    value="hahaha" checked>全量
+         </label>
+         <label class="checkbox-inline">
+             <input type="radio" name="choose" id="small"
+                    value="<%=clusterName%>s">小流量
+         </label>
+         <label class="checkbox-inline">
+             <input type="radio" name="choose" id="small"
+                    value="<%=clusterName%>e">error拉起
+         </label>
+         <input type ="submit" value ="下一步">
+    </div>
+</body>
+</html>

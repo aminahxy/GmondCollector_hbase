@@ -1,0 +1,1 @@
+mboxFactories.get('default').get('qbs_web_metrics_kb',0).setOffer(new mboxOfferDefault()).loaded();

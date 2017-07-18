@@ -1,0 +1,100 @@
+<%@ page
+import="tentacles.util.*"
+import="tentacles.matrix_util.*"
+import="tentacles.http_tools.*"
+import="tentacles.matrix_util.*"
+import="java.util.HashMap"
+import="java.util.List"
+import="java.util.Map"
+import="java.util.*"
+%>
+<!DOCTYPE html>
+<html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<head>
+   <title>normandy_phy</title>
+   <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <script src="./jquery.min.js"></script>
+   <script src="./bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="table-responsive">
+   <table class="table">   
+   <caption>线上物理队列对应的host列表，metajson</caption>
+       <thead>    
+      <tr>
+           <th>物理队列</th>
+           <th colspan="2">metajson</th>
+           <th colspan="2">host</th>
+         </tr>
+ </thead>
+      <tbody>
+<%     
+        out.println("<br>");
+        out.println("<br>");
+        int i=0;    
+        int j=100;    
+        String op=request.getParameter("choose");
+        String clusterName=op.substring(0,op.length()-1);;
+        String arr[]= request.getParameterValues("phy");
+        get_single_phy single=new get_single_phy();
+        List testhui=single.get_phy_single(clusterName,arr);
+        GetMatrixNodeByClusterTag testhh=new GetMatrixNodeByClusterTag();
+        Map<String, Map<Object,Map<String,Map<String,Object>>>> resultmap=testhh.GetMatrixNode(testhui);
+
+        for (Map.Entry<String, Map<Object,Map<String,Map<String,Object>>>> entry : resultmap.entrySet() )
+         { i++; 
+          j++;
+         %><tr><td>[<%=entry.getKey().toString().split(":")[entry.getKey().toString().split(":").length-1]%>]</td><%
+        
+         Map<Object,Map<String,Map<String,Object>> > metaInstance = entry.getValue();
+        for ( Map.Entry<Object,Map<String,Map<String,Object>>> entry1 : metaInstance.entrySet()) {
+           %><td>
+            <button id="btn" class="btn btn-primary" onClick="edittxt('<%=i%>')" >修改metajson</button>
+          </td><%
+            %><td>
+           <textarea class="form-control" id=<%=i%>  name=<%=i%> type="txt" rows="8" disabled="disabled" aria-describedby="sizing-addon1" max-width="80%" style="max-width:80%;"><%=entry1.getKey()%></textarea>
+           </td><%
+         // out.println("meta json is : ");
+          //      out.println("<br>");
+       
+         //out.println(entry1.getKey());
+         //       out.println("<br>");
+         StringBuffer scheduler = new StringBuffer();
+       for ( Map.Entry<String,Map<String,Object>> entryChild : entry1.getValue().entrySet() ) {
+
+         //out.println(entryChild.getKey());
+          scheduler.append(entryChild.getKey()+"\n");
+        }
+         %><td>
+        <button id="btn_host"  class="btn btn-primary" onClick="edithost('<%=j%>')">修改host列表</button>
+          </td>
+         <td>
+           <textarea class="form-control" id=<%=j%>  name=<%=j%> type="txt"  rows="8" disabled="disabled" aria-describedby="sizing-addon1" max-width="80%" style="max-width:80%;"><%=scheduler%></textarea>
+           </td><%
+        }
+         %></tr><%
+        }
+%>
+</tbody>
+</table>
+</div>
+<script type="text/javascript">
+   var txt = new Array(100);
+   var host = new Array(200);
+   for(var i=1;i<100;i++) { 
+    txt[i] = document.getElementById(i);
+    host[i] = document.getElementById(i);
+    host[i+100] = document.getElementById(i+100);
+}
+
+    function edittxt(x){
+            txt[x].removeAttribute('disabled');
+        }
+    function edithost(x){
+            host[x].removeAttribute('disabled');
+        }
+</script>
+</body>
+</html>

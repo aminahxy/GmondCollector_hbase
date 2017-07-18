@@ -1,0 +1,190 @@
+//package com.sina.hbase_start;
+package com.sina.data.bigmonitor.web.HbaseClient;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.KeyValue;
+import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.util.Bytes;
+import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
+
+import java.io.IOException;
+
+import java.util.*;
+
+import java.io.IOException;
+
+public class HbaseClient extends Configured implements Tool {
+        private int record_num_capacity = 10000;
+
+	private Table tableConn(String table_name) throws IOException {
+		Configuration config = HBaseConfiguration.create();
+		config.set("hbase.zookeeper.quorum", "10.39.3.78");
+		config.set("hbase.zookeeper.property.clientPort", "2181");
+		Connection connection = null;
+		Table table = null;
+		//table_name="ns_hadoopadmin:BigMonitorMetricDataClusterDay";
+		TableName TABLE_NAME = TableName.valueOf(table_name);
+		setConf(HBaseConfiguration.create(config));
+		connection = ConnectionFactory.createConnection(getConf());
+		table = connection.getTable(TABLE_NAME);
+
+		return table;
+
+	}
+
+        public String GetRangeRes(String table_name, String row, String rid, String start, String end) {
+                String startStr = row + "#" + rid + "#" + start;
+                String endStr = row + "#" + rid + "#" + end;
+                Table table = null;
+                try {
+                        table = tableConn(table_name);
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+                Scan scan = new Scan();
+
+                ResultScanner rs = null ;
+                try {
+                        rs = table.getScanner(scan);
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+                StringBuffer res = new StringBuffer();
+
+                for (Result r : rs) {
+                        for (KeyValue kv : r.raw()) {
+                                System.out.println(String.format("row:%s, family:%s, qualifier:%s, qualifiervalue:%s, timestamp:%s.",
+                                                Bytes.toString(kv.getRow()),
+                                                Bytes.toString(kv.getFamily()),
+                                                Bytes.toString(kv.getQualifier()),
+                                                Bytes.toString(kv.getValue()),
+                                                kv.getTimestamp())+"\n");
+
+                        }
+                }
+                try {
+                        table.close();
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+
+                return res.toString();
+        }
+
+        public String GetRowId(String table_name, String row) {
+        	Table table = null;
+        	try {
+            		table = tableConn(table_name);
+        	} catch (IOException e) {
+            		e.printStackTrace();
+        	}
+       
+        
+        	Get get = new Get(Bytes.toBytes(row));
+        	Result rs = null ;
+        	try {
+            		rs = table.get(get);
+        	} catch (IOException e) {
+            		e.printStackTrace();
+        	}
+        	String res = null;
+        	for (KeyValue kv : rs.raw()) {
+            		if(Bytes.toString(kv.getQualifier()).equals("id")){
+                		res = String.format("row:%s, family:%s, qualifier:%s, qualifiervalue:%s, timestamp:%s.",
+                        	Bytes.toString(kv.getRow()),
+                        	Bytes.toString(kv.getFamily()),
+                        	Bytes.toString(kv.getQualifier()),
+                        	Bytes.toString(kv.getValue()),
+                        	kv.getTimestamp())+"\n";
+                	break;
+            		}
+
+        	}
+        	try {
+            		table.close();
+        	} catch (IOException e) {
+            		e.printStackTrace();
+        	}
+
+        	return res;
+    }
+        
+
+        public List<List<Object>> GetRangeList(String table_name, String row, String rid, String start, String end) {
+                String startStr = row + "#" + rid + "#" + start;
+                String endStr = row + "#" + rid + "#" + end;
+                Table table = null;
+                try {
+                        table = tableConn(table_name);
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+                Scan scan = new Scan();
+               // scan.setFilter(filterlist);
+                scan.setStartRow(Bytes.toBytes(startStr));
+		scan.setStopRow(Bytes.toBytes(endStr));
+                ResultScanner rs = null ;
+                try {
+                        rs = table.getScanner(scan);
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+                List res = new ArrayList<List<Object>>();
+
+                int count = 0;
+                for (Result r : rs) {
+                        for (KeyValue kv : r.raw()) {
+                                List tmplist = new ArrayList<Object>();
+                                //tmplist.add(TimeStampToUtc.TsToUtc(kv.getTimestamp()));
+                                //tmplist.add(Bytes.toString(kv.getValue()));
+                                tmplist.add(kv.getTimestamp());
+                                tmplist.add(Double.valueOf(Bytes.toString(kv.getValue())));
+                                res.add(tmplist);
+                                /*
+                                res.append(String.format("row:%s, family:%s, qualifier:%s, qualifiervalue:%s, timestamp:%s.",
+                                                Bytes.toString(kv.getRow()),
+                                                Bytes.toString(kv.getFamily()),
+                                                Bytes.toString(kv.getQualifier()),
+                                                Bytes.toString(kv.getValue()),
+                                                kv.getTimestamp())+"\n");
+                                */
+                                count++;
+                                if(count>=record_num_capacity){
+                                        break;
+                                }
+
+                        }
+                        if(count>=record_num_capacity){
+                                break;
+                        }
+                }
+                try {
+                        table.close();
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+
+                return res;
+        }
+
+
+
+
+	public static void main(String[] argv) throws Exception {
+
+		String res = new HbaseClient().GetRangeRes(argv[0], argv[1], argv[2], argv[3], argv[4]);
+		//String res = new HbaseClient().GetRowId(argv[0], argv[1]);
+		System.out.println(res);
+
+	}
+
+	@Override
+	public int run(String[] args) throws Exception {
+		return 0;
+	}
+}
+

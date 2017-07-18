@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                <title>Highcharts Example</title>
+
+                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+                <p id="demo"></p>
+                <script type="text/javascript">
+                function Run(strPath) { 
+                        var objShell=new ActiveXObject("wscript.shell"); 
+                        var bash_rs=objShell.run(strPath); 
+                        return bash_rs;
+                }
+                //var d=Run("./test.sh");
+                var d=Run("nodepad.exe");
+                document.write("<h1>" + d + "</h1>");
+                </script>
+                <script type="text/javascript">
+                function test() {
+                    var x=5;
+                    return x;
+                }
+                var c=test();
+                document.write("<h1>" + c + "</h1>");
+                </script>
+                <script type="text/javascript">
+                function test1() {
+                    var x=5;
+                    return x;
+                }
+                var a="123";
+                var b=new test();
+                document.write("<h1>This is a heading</h1>");
+                document.write("<h1>" + a + "</h1>");
+                document.write("<h1>" + Run("./test.sh") + "</h1>");
+                document.write("<h1>" + b + "</h1>");
+                document.write("<h1>" + test1() + "</h1>");
+                document.getElementById("demo").innerHTML=test();
+                </script>
+        </head>
+        <body>
+<script src="./js/highcharts.js"></script>
+<script src="./js/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+        </body>
+</html>
